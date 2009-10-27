@@ -1,0 +1,24 @@
+build.menu.1[0]=com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make
+build.menu.2[0]=com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;rebuild
+content.layout.xml.[0]=<project-layout><tab_container selected_index="5"><tab node_name="src/othello/AI/ai.java"/><tab node_name="src/othello/Frame_hikkuri.java"/><tab node_name="src/othello/game.java"/><tab node_name="src/othello/AI/shuban/shuban.java"/><tab node_name="src/othello/AI/joban/tujo.java"/><tab node_name="src/othello/AI/tyuban/tujo.java"/></tab_container></project-layout>
+debug.NoTracingClasses.1[0]=16 java.lang.Object1  1 -1
+debug.NoTracingClasses.2[0]=21 java.lang.ClassLoader1  1 -1
+debug.NoTracingClasses.3[0]=16 java.lang.String1  1 -1
+debug.SplitThreadsAndDataView[0]=0
+history.files.active[0]=src/othello/AI/tyuban/tujo.java,F;61,14592
+history.files.open.1[0]=src/othello/AI/ai.java,F;35,1510
+history.files.open.2[0]=src/othello/Frame_hikkuri.java,F;33,1391
+history.files.open.3[0]=src/othello/game.java,F;1,171
+history.files.open.4[0]=src/othello/AI/shuban/shuban.java,F;14,2331
+history.files.open.5[0]=src/othello/AI/joban/tujo.java,F;391,11618
+history.files.open.6[0]=src/othello/AI/tyuban/tujo.java,F;61,14592
+import.optimize.legacyPropertiesRead[0]=1
+sys.Author[0]=
+sys.DefaultPackage[0]=othello.AI.joseki
+sys.ReopenHistory.1[0]=src/othello/Frame.java
+team.lastScanned[0]=1123169199140
+wizard.package.package_history.1[0]=othello.AI.tyuban
+wizard.package.package_history.2[0]=othello.AI
+wizard.package.package_history.3[0]=othello.AI.joban
+wizard.package.package_history.4[0]=othello.AI.shuban
+wizard.package.package_history.5[0]=othello
