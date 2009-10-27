@@ -1,0 +1,43 @@
+//とりあえずNegaMax
+  public static double run(boolean last,int depth , int turn ,int turn_count , double alpha, double beta){
+    if(depth <= 0 || turn_count > 60){
+      return eval(turn);
+    }else{
+      int[] bkp = (int[])p.clone(); //局面のバックアップ
+      int move_count = 0;
+      double s = 0; //NegaMaxの要．
+      for (int x = 1; x <= 8; x++) {
+        for (int y = 1; y <= 8; y++) {
+            if(pto.main(x,y,turn)){
+              s = -1 * run(true,depth - 1, turn * -1, turn_count + 1, -beta, -alpha);
+              count[depth][0]++;
+              move_count++;
+              p = (int[])bkp.clone(); //戻す
+              if(depth == master_depth){
+                System.out.println("x:"+x+" y:"+y+" eval:"+s);
+              }
+              if(s >= beta){
+                count[depth][1]++;
+                return s;
+              }else{
+                if (s > alpha) {
+                  if (depth == master_depth) {
+                    move[0] = x;
+                    move[1] = y;
+                  }
+                  alpha = s;
+                }
+              }
+            }
+        }
+      }
+      if(move_count == 0){//パス処理
+        if(last == false){//前回もダメ＝ここは葉っぱ
+          return eval(turn);
+        }else{
+          return -1 * run(false,depth - 1, turn * -1 , turn_count, -beta, -alpha);
+        }
+      }
+      return alpha;
+    }
+  }

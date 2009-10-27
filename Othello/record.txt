@@ -1,0 +1,2 @@
+yyyy/MM/dd/HH:mm:ss#black:white#record
+2007/06/10/04:18:29#39(zero):25(zero)#c4,e3,f4,c5,d6,f5,d3,f3,e6,c6,b5,a4,e2,d2,f2,c3,a5,b6,a6,f6,b4,e7,a3,d7,g5,b3,f7,e1,f1,g6,f8,d1,g4,h3,h4,h6,h2,d8,e8,g1,c8,g3,c2,c7,g7,b7,a8,c1,b2,g8,h8,h7,h5,a1,b1,a2,h1,b8,a7,g2,

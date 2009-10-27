@@ -1,0 +1,2 @@
+yyyy/MM/dd/HH:mm:ss#black:white#record
+2005/12/29/00:28:33#12(man):52(zero)#f5,d6,c6,f4,e6,c5,c4,d7,c8,b5,a6,d8,e8,e7,d3,b6,c7,a5,a4,e3,f6,f8,c3,d2,f7,b8,b4,g8,e1,g4,e2,g6,h6,g5,h5,h4,h3,f3,g3,f2,g2,f1,g1,h1,g7,d1,c1,h2,c2,b1,b2,b7,a7,a1,a2,a8,b3,a3,h7,h8,
