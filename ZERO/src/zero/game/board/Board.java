@@ -22,7 +22,9 @@ public class Board {
     public static final byte LOWER_RIGHT   = (byte)32;
     public static final byte RIGHT         = (byte)64;
     public static final byte UPPER_RIGHT   = (byte)128;
-    public static final byte DISC_MAX       = (8+2) * (8+2);
+
+    public static final byte BOARD_SIZE       = 8;
+    public static final byte DISC_MAX       = (byte)((BOARD_SIZE+2) * (BOARD_SIZE+2));
     public static final byte TURN_MAX       = 60;
 
     private final byte[] RawBoard = new byte[DISC_MAX];
@@ -30,6 +32,28 @@ public class Board {
     //一応ログとっておいた方がよさそうなのはこっち
     private Log Log;
 
+    public void init(){
+        for(int i=0;i<RawBoard.length;i++){
+            RawBoard[i] = Disc.EMPTY;
+        }
+        for(byte i=0;i<BOARD_SIZE+2;i++){
+            RawBoard[Point.getBoardIndex(      i, (byte)9)] = Disc.EMPTY;
+            RawBoard[Point.getBoardIndex(      i, (byte)0)] = Disc.EMPTY;
+            RawBoard[Point.getBoardIndex((byte)9,       i)] = Disc.EMPTY;
+            RawBoard[Point.getBoardIndex((byte)0,       i)] = Disc.EMPTY;
+        }
+        RawBoard[Point.getBoardIndex((byte)4, (byte)4)] = Disc.WHITE;
+        RawBoard[Point.getBoardIndex((byte)5, (byte)5)] = Disc.WHITE;
+        RawBoard[Point.getBoardIndex((byte)5, (byte)4)] = Disc.BLACK;
+        RawBoard[Point.getBoardIndex((byte)4, (byte)5)] = Disc.BLACK;
+        CurrentColor = Disc.BLACK;
+        Log.init();
+        LogElem elem = Log.getLastElem();
+        elem.setDiscStorage(Disc.EMPTY, (byte)(BOARD_SIZE*BOARD_SIZE-4));
+        elem.setDiscStorage(Disc.WHITE, (byte)2);
+        elem.setDiscStorage(Disc.BLACK, (byte)2);
+        initMovable();
+    }
     public boolean move(Point pt){
         if(!pt.isValidRange() ||
                 Log.getNowElem().getMobility(pt.getBoardIndex()) == NONE){
@@ -55,7 +79,18 @@ public class Board {
         return true;
     }
     public boolean undo(){
-        return false;
+        LogElem elem = Log.undo();
+        if(elem == null){
+            return false;
+        }
+        CurrentColor *= -1;
+        PointStack updated = elem.getUpdated();
+        Iterator<Point> it = updated.getIterator();
+        RawBoard[elem.getMoved().getBoardIndex()] = Board.NONE;
+        while(it.hasNext()){
+            RawBoard[it.next().getBoardIndex()] *= -1;
+        }
+        return true;
     }
     public boolean isGameOver(){
         if(getTurns() == TURN_MAX){
@@ -86,14 +121,18 @@ public class Board {
     public byte countDisc(byte color){
         return Log.getNowElem().getDiscStorage(color);
     }
-    public void getUpdate(){
-
+    public PointStack getUpdated(){
+        LogElem elem = Log.getLastElem();
+        if(elem == null){
+           return null;
+        }
+        return elem.getUpdated();
     }
-    public void getMovablePos(){
-
+    public PointStack getMovablePos(){
+        return Log.getNowElem().getMovable();
     }
     public byte getTurns(){
-        return (byte)Log.getNowTurnCount();
+        return Log.getNowTurnCount();
     }
     private void flipDiscs(Point pt){
         LogElem elem = Log.getNowElem();
@@ -199,9 +238,9 @@ public class Board {
         Disc disc = new Disc((byte)0,(byte)0,CurrentColor);
         LogElem elem = Log.getNowElem();
         byte[] mobility_list =  elem.getMobility();
-        for(byte y=1;y<=8;y++){
+        for(byte y=1;y<=BOARD_SIZE;y++){
             disc.setY(y);
-            for(byte x=1;x<=8;x++){
+            for(byte x=1;x<=BOARD_SIZE;x++){
                 disc.setX(x);
                 if(NONE != (mobility_list[disc.getBoardIndex()] = checkMobility(disc))){
                     elem.getMovable().push(disc);
@@ -308,14 +347,15 @@ public class Board {
         }
         return mobility;
     }
-
 }
 
 class Log{
-    private LogElem[] ElemStack;
-    private int NowStackIdx;
+    private final LogElem[] ElemStack = new LogElem[Board.TURN_MAX];
+    private byte NowStackIdx;
     public Log(){
-        ElemStack = new LogElem[Board.TURN_MAX];
+        init();
+    }
+    public void init(){
         for(int i=0;i<Board.TURN_MAX;i++){
             ElemStack[i] = new LogElem();
         }
@@ -324,12 +364,25 @@ class Log{
     public LogElem getNowElem(){
         return ElemStack[NowStackIdx];
     }
-    public int getNowTurnCount(){
+    public LogElem getLastElem(){
+        if(NowStackIdx > 0){
+            return ElemStack[NowStackIdx-1];
+        }
+        return null;
+    }
+    public byte getNowTurnCount(){
         return NowStackIdx;
     }
     public LogElem next(){
         NowStackIdx++;
         ElemStack[NowStackIdx-1].next(ElemStack[NowStackIdx]);
+        return ElemStack[NowStackIdx];
+    }
+    public LogElem undo(){
+        if(NowStackIdx <= 0){
+            return null;
+        }
+        NowStackIdx--;
         return ElemStack[NowStackIdx];
     }
 }
@@ -351,6 +404,9 @@ class LogElem{
     }
     public void setMoved(byte x,byte y){
         Moved.setPoint(x,y);
+    }
+    public Point getMoved(){
+        return Moved;
     }
     public byte getDiscStorage(byte color) {
         return Disc[color+1];
