@@ -99,11 +99,13 @@ public class View extends FrameView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         mainPanel = new javax.swing.JPanel();
-        TitleLabel = new javax.swing.JLabel();
         BoardParentPanel = new javax.swing.JPanel();
         BoardPanel = new javax.swing.JPanel();
+        TitlePanel = new javax.swing.JPanel();
+        TitleLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -118,29 +120,27 @@ public class View extends FrameView {
         mainPanel.setName("mainPanel"); // NOI18N
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        TitleLabel.setFont(new java.awt.Font("MS UI Gothic", 1, 18)); // NOI18N
+        BoardParentPanel.setName("BoardParentPanel"); // NOI18N
+        BoardParentPanel.setLayout(new java.awt.BorderLayout());
+
+        BoardPanel.setName("BoardPanel"); // NOI18N
+        BoardPanel.setLayout(new java.awt.GridBagLayout());
+        BoardParentPanel.add(BoardPanel, java.awt.BorderLayout.CENTER);
+
+        TitlePanel.setName("TitlePanel"); // NOI18N
+        TitlePanel.setLayout(new java.awt.GridBagLayout());
+
+        TitleLabel.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(zero.App.class).getContext().getResourceMap(View.class);
         TitleLabel.setText(resourceMap.getString("TitleLabel.text")); // NOI18N
         TitleLabel.setName("TitleLabel"); // NOI18N
-        mainPanel.add(TitleLabel, java.awt.BorderLayout.PAGE_START);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        TitlePanel.add(TitleLabel, gridBagConstraints);
 
-        BoardParentPanel.setName("BoardParentPanel"); // NOI18N
-        BoardParentPanel.setLayout(new java.awt.GridBagLayout());
-
-        BoardPanel.setName("BoardPanel"); // NOI18N
-
-        javax.swing.GroupLayout BoardPanelLayout = new javax.swing.GroupLayout(BoardPanel);
-        BoardPanel.setLayout(BoardPanelLayout);
-        BoardPanelLayout.setHorizontalGroup(
-            BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        BoardPanelLayout.setVerticalGroup(
-            BoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        BoardParentPanel.add(BoardPanel, new java.awt.GridBagConstraints());
+        BoardParentPanel.add(TitlePanel, java.awt.BorderLayout.PAGE_START);
 
         mainPanel.add(BoardParentPanel, java.awt.BorderLayout.CENTER);
 
@@ -211,6 +211,7 @@ public class View extends FrameView {
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JPanel BoardParentPanel;
     private javax.swing.JLabel TitleLabel;
+    private javax.swing.JPanel TitlePanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
