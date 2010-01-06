@@ -419,8 +419,6 @@ class LogElem{
             next.Disc[i] = this.Disc[i];
         }
         Moved.setPoint((byte)0,(byte)0);
-    }
-    public void clear(){
         Updated.clear();
         Movable.clear();
     }
