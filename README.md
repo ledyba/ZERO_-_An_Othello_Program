@@ -1,4 +1,4 @@
-ZERO An Othello Program
+ZERO - An Othello Program
 =========================
 10年位前に作ってたJava製のオセロプログラムです。
 
