@@ -4,7 +4,7 @@ ZERO - An Othello Program
 
 年末に更新するのがいつものパターン。
 
-で、強いの
+で、強いの？
 =====
 https://github.com/ledyba/ZERO---An-Othello-Program/tree/20050813/ZIP_Package/OthelloProgram%20ZERO
 
@@ -12,4 +12,4 @@ https://github.com/ledyba/ZERO---An-Othello-Program/tree/20050813/ZIP_Package/Ot
 
 ライセンス
 =====
-GPL v3 or later
+AGPL v3 or later
